@@ -1,0 +1,28 @@
+# key 32byte
+jwt:
+  secretKey: 12345678901234567890123456789012
+  refreshKey: 12345678901234567890123456789012
+
+
+# database
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # 개인 PC에서 만들어놓은 Database이름을 작성
+    url: jdbc:mysql://localhost:3306/shoppingmall_db?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    # mysql에 생성한 사용자 계정 정보를 작성
+    username: gyeom
+    password: 3677
+
+  # Spring data jpa
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    open-in-view: true
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        format_sql: true
