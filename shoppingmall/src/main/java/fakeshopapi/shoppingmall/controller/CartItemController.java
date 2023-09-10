@@ -2,6 +2,7 @@ package fakeshopapi.shoppingmall.controller;
 
 import fakeshopapi.shoppingmall.domain.CartItem;
 import fakeshopapi.shoppingmall.dto.AddCartItemDto;
+import fakeshopapi.shoppingmall.dto.CartItemResponseDto;
 import fakeshopapi.shoppingmall.dto.LoginUserDto;
 import fakeshopapi.shoppingmall.security.jwt.util.IfLogin;
 import fakeshopapi.shoppingmall.service.CartItemService;
@@ -19,7 +20,7 @@ public class CartItemController {
     private final CartItemService cartItemService;
 
     @PostMapping
-    public CartItem addCartItem(@IfLogin LoginUserDto loginUserDto, @RequestBody AddCartItemDto addCartItemDto){
+    public CartItemResponseDto addCartItem(@IfLogin LoginUserDto loginUserDto, @RequestBody AddCartItemDto addCartItemDto){
 
         // 같은 cart에 같은 product가 있으면 quantity를 더해줘야함
         if(cartItemService.isCartItemExist(loginUserDto.getMemberId(), addCartItemDto.getCartId(), addCartItemDto.getProductId())){
@@ -42,7 +43,7 @@ public class CartItemController {
     }
 
     @GetMapping
-    public List<CartItem> getCartItems(@IfLogin LoginUserDto loginUserDto,
+    public List<CartItemResponseDto> getCartItems(@IfLogin LoginUserDto loginUserDto,
                                        @RequestParam(required = false) Long cartId) {
         if(cartId == null)
             return cartItemService.getCartItems(loginUserDto.getMemberId());
